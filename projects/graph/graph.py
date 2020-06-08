@@ -13,13 +13,14 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex_id] = set()  # set of edges from this vert
+        # a set is working just a list except it allows O(1) lookups like a hashtable and it doesn't allow duplicates
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        self.vertices[v1].add(v2)  # add v2 as a neighbor to v1
 
     def get_neighbors(self, vertex_id):
         """
