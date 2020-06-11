@@ -5,7 +5,7 @@ from util import Queue
 def earliest_ancestor(ancestors, starting_node):
     graph = Graph()
 
-    # First, we write a for loop to loop through the ancestors list and create vertices at each of the values
+    # First, we write a for loop to loop through the ancestors list and create vertices for each of the values
     for family_tuple in ancestors:
         parent = family_tuple[0]
         child = family_tuple[1]
@@ -22,20 +22,21 @@ def earliest_ancestor(ancestors, starting_node):
     qq = Queue()
     qq.enqueue([starting_node])
 
-    # We create a variable for tracking the maximum path length so we know when we have found the ancestor that is farthest away
+    # We create a variable for tracking the maximum path length to help us determine when we have found the ancestor that is farthest away
     current_max_length = 1
 
-    # We initialize earliest ancestor
+    # We initialize earliest ancestor as -1 because if a node does not have an ancestor, we return -1 
     earliest_ancestor = -1
 
-    # Here we write a while loop that runs as long as the queue is not empty
+    # Here we write a while loop that runs until the queue is empty
     while qq.size() > 0:
-        # We dequeue the current path and set vertex to point to the last element in the path
+        # We dequeue the current path and set vertex to point to the last node in the path
         path = qq.dequeue()
         vertex = path[-1]
 
         # Then we write an if statement to compare two sets of data to find either:
         # A path that is equal to or longer than the maximum path length we know of and a vertex with a value less than that of the earliest ancestor we know of
+        # OR
         # A path that is greater than the maximum path length we know of
         if (len(path) >= current_max_length and vertex < earliest_ancestor) or (len(path) > current_max_length):
             # If we find one or the other to be true, we mark the current vertex as the earliest ancestor and set the current maximum length to the length of the path we're looking at
@@ -49,5 +50,5 @@ def earliest_ancestor(ancestors, starting_node):
             new_path.append(neighbor)
             qq.enqueue(new_path)
 
-    # Finally, we return the earliest ancestor
+    # Finally, we return the earliest ancestor once the queue is empty and the while loop ends
     return earliest_ancestor
