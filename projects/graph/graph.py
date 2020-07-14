@@ -108,7 +108,7 @@ class Graph:
         # Initialize visited
         visited = set()
 
-        # Initialize Queue
+        # Initialize Queue with starting vertex as a list because we will be enqueuing the path to a vertex as a list of vertices we use to arrive at the desired vertex
         qq = Queue()
         qq.enqueue([starting_vertex])
 
@@ -164,7 +164,7 @@ class Graph:
                         ss.push(new_path)
 
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex, path=None, visited=None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
@@ -172,7 +172,27 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        # We mark our node as visited
+        if visited is None:
+            visited = set()
+        
+        visited.add(starting_vertex)
+
+        if path is None:
+            path = [starting_vertex]
+        
+        if starting_vertex == destination_vertex:
+            return path
+
+        neighbors = self.get_neighbors(starting_vertex)
+
+        for neighbor in neighbors:
+            if neighbor not in visited:
+                result = self.dfs_recursive(neighbor, destination_vertex, path + [neighbor], visited)
+
+                if result is not None:
+                    print("Result: ", result)
+                    return result
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
