@@ -40,7 +40,7 @@ def earliest_ancestor(ancestors, starting_node):
             current_max_length = len(path)
             earliest_ancestor = current_node
         
-        # We loop through the parents of the current node, update the path to each parent, and push those new paths to the stack
+        # We loop through the parents of the current node, create a copy of the current path, append to the copy the path to each parent, and push those new paths to the stack
         for next_parent in gg.vertices[current_node]:
             new_path = list(path)
             new_path.append(next_parent)
