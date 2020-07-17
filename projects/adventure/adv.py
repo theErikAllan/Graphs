@@ -39,7 +39,7 @@ def breadcrumb_generator(visited=None):
     if visited is None:
         visited = set()
 
-    # Breadcrumbs will be the trail of breadcrumbs we leave behind to track our movements
+    # Breadcrumbs will be the trail of breadcrumbs we leave behind to track our movements from the last visited room to the next unvisited room
     breadcrumbs = []
 
     # We loop through the available exits and move the player through each one
@@ -56,7 +56,7 @@ def breadcrumb_generator(visited=None):
             # And recursively call the function to continue exploring the rooms with the breadcrumbs we have dropped so far
             breadcrumbs = breadcrumbs + breadcrumb_generator(visited)
 
-            # The recursion will end when we reach a room with only one exit, at which point we must backtrack and drop breadcrumbs along the way
+            # The recursion will end when we reach a room with only one exit, at which point we must backtrack and drop a breadcrumb along the way
             backtrack = reverse_compass[room_exit]
             player.travel(backtrack)
             breadcrumbs.append(backtrack)
